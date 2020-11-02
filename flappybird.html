@@ -1,0 +1,125 @@
+<DOCTOTYPE! html>
+    <html>
+    <style>
+        .loader {
+            position: fixed;
+            background-color: #FFF;
+            opacity: 1;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            text-align: center;
+        }
+    </style>
+
+    <head>
+        <link rel="shortcut icon" href="/game/images/favico.png"/>
+        <title>Flappy bird</title>
+        <script src="scripts/main.js"></script>
+        <script src="scripts/bird.js"></script>
+        <script src="scripts/init.js"></script>
+        <script src="scripts/settings.js"></script>
+        <link rel="stylesheet" href="style/main.css">
+        <script type="text/javascript">
+            var birdimage = new Image(bird.width, bird.height);
+            birdimage.src = "images/bird.png";
+            var imagerestore = birdimage;
+
+            var gor = new Image(52, 242);
+            gor.src = "images/gor.png";
+
+            var dol = new Image(52, 378);
+            dol.src = "images/dol.png";
+
+            var pauseimg = new Image(50, 50);
+            pauseimg.src = "images/pause.png";
+
+            var startmusic = new Audio("music/start.mp3")
+            var gamemusic = new Audio("music/game.mp3");
+            var smrtmusic = new Audio("music/smrt.mp3");
+
+            startmusic.play();
+            startmusic.loop = true;
+        </script>
+    </head>
+
+    <body onload="init()">
+        <div class="loader">
+            <div class="middle">
+                <h1>Loading...</h1>
+            </div>
+        </div>
+        <div id="start">
+            <div id="welcome">
+                <h1>Welcome to flappy bird!</h1>
+            </div>
+            <div id="gumbi">
+                <button value="START" onclick="start()" class="btn startbt">START</button>
+                <button value="SETTINGS" onclick="settings()" class="btn setbt">SETTINGS</button>
+            </div>
+            <p id="madeby">Made by Patrik Kocmut.</p>
+        </div>
+        <canvas id="canvas" onmousedown="keypress('down')" onmouseup="keypress('up')"></canvas>
+        <div id="clicktocontinue" onclick="unpause()">
+            <h1>Click to continue!</h1>
+        </div>
+        <button id="clicktotitlepause" onclick="pausetitle()">Or click here to go back to the title screen.</button>
+        <div id="over">
+            <h1>Game over!</h1>
+            <h3 class="inline">Your score was: </h3><h3 id="endscore" class="inline"></h3>
+            <button onclick="restart()" class="pol btn round startbt l2">Replay</button>
+            <button onclick="titlescreen()" class="pol btn round setbt r2">Title screen</button>
+        </div>
+        <div id="settings">
+            <div" class="stolpec levo">
+                <h1>Game settings:</h1>
+                <h3>Default values are down below. </h3>
+                <h3>Changing them is not recommended.</h3>
+                <hr>
+                <form id="nastavitve">
+                    <p>Obsticle spawn rate (ms): </p><input class="input" type="text" id="novaoviraspeed"
+                        placeholder="2000">
+                    <br>
+                    <p>Game update rate (speed) [ms]: </p><input class="input" type="text" id="fps" placeholder="1000/120">
+                    <br>
+                    <p>Obsticle width (px): </p><input class="input" type="text" id="obsticlewidth" placeholder="50">
+                    <br>
+                    <p>Gap size between upper and lower pipe (px): </p><input class="input" type="text" id="pipegap"
+                        placeholder="150">
+                    <br>
+                    <p>Pixels for pipe to travel every frame (px): </p><input class="input" type="text"
+                        id="obsticlespeed" placeholder="2">
+                    <br>
+                    <p>Power of your mice press: </p><input class="input" type="text" id="power" placeholder="0.05">
+                    <br>
+                    <p>Gravity power: </p><input class="input" type="text" id="gravitacija" placeholder="0.02">
+                    <br>
+                    <p>Bird width and height (px): </p>
+                    <input type="text" id="width1" placeholder="57" class="pol">
+                    <input type="text" id="height1" placeholder="45" class="pol d3">
+                </form>
+                <br><br><br>
+        </div>
+        <div class="stolpec" id="desno">
+            <h2>Upload your own player!</h2>
+            <div class="container">
+                <div class="button-wrap">
+                    <form id="form">
+                        <label class="button" for="file">Upload File</label>
+                        <input id="file" type="file">
+                    </form>
+                </div>
+            </div>
+            <br>
+            <button onclick="restore()" class="btn setbt pol restorebt r">Restore settings</button>
+            <button onclick="restoreimage()" class="btn setbt pol restorebt l">Restore image</button>
+            <br>
+            <button onclick="apply()" class="btn startbt t">Apply</button>
+        </div>
+        </div>
+        <div id="image"></div>
+    </body>
+
+    </html>
